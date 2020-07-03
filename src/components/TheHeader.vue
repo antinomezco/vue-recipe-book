@@ -1,11 +1,11 @@
 <template>
   <header>
     <div class="full-background">
-      <nav>
-        <a class="hover">Home</a>
-        <a class="hover">About</a>
-        <a class="hover">Login</a>
-      </nav>
+      <!--<nav>-->
+      <!--  <a class="hover">Home</a>-->
+      <!--  <a class="hover">About</a>-->
+      <!--  <a class="hover">Login</a>-->
+      <!--</nav>-->
     </div>
   </header>
 </template>
