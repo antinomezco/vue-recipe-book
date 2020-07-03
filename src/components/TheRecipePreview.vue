@@ -190,20 +190,7 @@ export default {
     items: [],
     items2: [
       { nombre: 'Pork chops', category: 'american', ingredient: 'pork', descripcion: 'porkchop recipe instructions', weblink: 'enlace 1', image:'spicyporkchops.jpg' },
-      { nombre: 'Lasagna', category: 'italian', ingredient: 'beef', descripcion: 'lasaga recipe', weblink: 'enlace 2', image:'lasagna.jpg' },
-      { nombre: 'Cashew chicken', category: 'breakfast', ingredient: 'eggs', descripcion: 'porkchop recipe instructions', weblink: 'enlace 3', image:'cashewchicken.jpg' },
-      { nombre: 'General tao', category: 'chinese', ingredient: 'pork', descripcion: 'porkchop recipe instructions', weblink: 'enlace 4', image:'generaltao.jpg' },
-      { nombre: 'Fried rice', category: 'fruit', ingredient: 'banana', descripcion: 'fried rice recipe instructions', weblink: 'enlace 5', image:'friedrice.jpg' },
-      { nombre: 'French onion soup', category: 'american', ingredient: 'pork', descripcion: 'Sriracha chicken instructions', weblink: 'enlace 1', image:'frenchonionsoup.jpg' },
-      { nombre: 'Bulgogi', category: 'american', ingredient: 'pork', descripcion: 'Bulgogi ground meat recipe', weblink: 'enlace 1', image:'bulgogi.jpg' },
-      { nombre: 'Riz collé', category: 'american', ingredient: 'pork', descripcion: 'Bao zu recipe', weblink: 'enlace 1' , image:'rizcolle.jpg' },
-      { nombre: 'Meatloaf', category: 'american', ingredient: 'pork', descripcion: 'Meatloaf recipe', weblink: 'enlace 1' , image:'meatloaf.jpg' },
-      { nombre: 'Mac and cheese chili', category: 'american', ingredient: 'pork', descripcion: 'MAc and cheese chili recipe', weblink: 'enlace 1' , image:'macandcheesechili.jpg' },
-      { nombre: 'Butter chicken', category: 'american', ingredient: 'pork', descripcion: 'Butter chicken recipe', weblink: 'enlace 1' , image:'butterchicken.jpg' },
-      { nombre: 'Cajun chicken', category: 'american', ingredient: 'pork', descripcion: 'Tikka masala recipe', weblink: 'enlace 1' , image:'cajunchicken.jpg' },
-      { nombre: 'Chinese meatballs', category: 'american', ingredient: 'pork', descripcion: 'cilantro chicken recipe', weblink: 'enlace 1' , image:'chinesemeatballs.jpg' },
-      { nombre: 'Red curry lentils', category: 'american', ingredient: 'pork', descripcion: 'Red curry lentils recipe', weblink: 'enlace 1' , image:'redcurrylentils.jpg' },
-      { nombre: 'Thai peanut chicken', category: 'american', ingredient: 'pork', descripcion: 'Udon recipe', weblink: 'enlace 1' , image:'thaipeanutchicken.jpg' },
+      { nombre: 'Lasagna', category: 'italian', ingredient: 'beef', descripcion: 'lasaga recipe', weblink: 'enlace 2', image:'lasagna.jpg' }
     ]
   }),
   computed: {
