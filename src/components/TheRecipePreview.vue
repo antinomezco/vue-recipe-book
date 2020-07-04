@@ -62,9 +62,9 @@
               lg="3"
             >
               <v-card>
-                <v-card-title class="subheading font-weight-bold">
-                  {{ item.nombre }}
-                </v-card-title>
+                <!--<v-card-title class="subheading font-weight-bold">-->
+                <!--  {{ item.nombre }}-->
+                <!--</v-card-title>-->
                 <v-row justify="center">
                   <v-dialog v-model="dialog" scrollable max-width="50%">
                     <template v-slot:activator="{ on, attrs }">
@@ -72,10 +72,13 @@
                       <v-img
                         :src="require(`@/static/${item.image}`)"
                         height="194"
+                        width="452"
                         v-bind="attrs"
                         v-on="on"
-                        style="cursor: <pointer></pointer>"
-                      />
+                        style="cursor: pointer"
+                      >
+                        <h2 class="text-left white--text" style="padding-left: 8px; padding-top: 150px; -webkit-text-stroke: 1px black;">{{ item.nombre }}</h2>
+                      </v-img>
                     </v-card>
                     </template>
                     <v-card>
