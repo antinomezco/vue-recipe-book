@@ -82,12 +82,35 @@
                     </v-card>
                     </template>
                     <v-card>
-                      <v-card-title>{{ item.nombre }}</v-card-title>
+                      <v-card-title>
+                        {{ item.nombre }}
+                      </v-card-title>
+                      <v-card-text>
+                        <p>
+                          Servings: {{ item.servings }}
+                        </p>
+                        <p>
+                          Prep Time: {{ item.preptime }}
+                        </p>
+                        <p>
+                          Cook Time: {{ item.cooktime }}
+                        </p>
+                      </v-card-text>
+                      <v-card-text style="height: auto;">
+                        <ul v-for="(ingredient, index) in item.ingredients" :key="index">
+                          <div v-if="ingredient.Unit==='section'">
+                            <h2>{{ingredient.Name}}</h2>
+                          </div>
+                          <div v-else>
+                            <li>{{ ingredient.DisplayQuantity }} {{ ingredient.Unit }} {{ ingredient.Name }}</li>
+                          </div>
+                        </ul>
+                      </v-card-text>
                       <v-divider></v-divider>
-                      <v-card-text style="height: 300px;" v-html="item.descripcion">
-                        <!--<p>
-                          {{ item.descripcion }}
-                        </p>-->
+                      <v-card-text style="height: 300px;">
+                        <p v-for="(desc, index) in item.descripcion" :key="index">
+                          {{ desc }}
+                        </p>
                       </v-card-text>
                       <v-divider></v-divider>
                       <v-card-actions>
@@ -222,7 +245,11 @@ export default {
         id: item.ref.key,
         nombre: item.child("nombre").val(),
         category: item.child("category").val(),
-        ingredient: item.child("ingredient").val(),
+        ingredients: item.child("ingredients").val(),
+        notes: item.child("notes").val(),
+        servings: item.child("servings").val(),
+        preptime: item.child("preptime").val(),
+        cooktime: item.child("cooktime").val(),
         descripcion: item.child("descripcion").val(),
         image: item.child("image").val(),
       });
