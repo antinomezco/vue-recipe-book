@@ -62,62 +62,19 @@
               lg="3"
             >
               <v-card>
-                <!--<v-card-title class="subheading font-weight-bold">-->
-                <!--  {{ item.nombre }}-->
-                <!--</v-card-title>-->
                 <v-row justify="center">
-                  <v-dialog v-model="dialog" scrollable max-width="50%">
-                    <template v-slot:activator="{ on, attrs }">
-                    <v-card>
-                      <v-img
-                        :src="require(`@/static/${item.image}`)"
-                        height="194"
-                        width="452"
-                        v-bind="attrs"
-                        v-on="on"
-                        style="cursor: pointer"
-                      >
-                        <h2 class="text-left white--text" style="padding-left: 8px; padding-top: 150px; -webkit-text-stroke: 1px black;">{{ item.nombre }}</h2>
-                      </v-img>
-                    </v-card>
-                    </template>
-                    <v-card>
-                      <v-card-title>
-                        {{ item.nombre }}
-                      </v-card-title>
-                      <v-card-text>
-                        <p>
-                          Servings: {{ item.servings }}
-                        </p>
-                        <p>
-                          Prep Time: {{ item.preptime }}
-                        </p>
-                        <p>
-                          Cook Time: {{ item.cooktime }}
-                        </p>
-                      </v-card-text>
-                      <v-card-text style="height: auto;">
-                        <ul v-for="(ingredient, index) in item.ingredients" :key="index">
-                          <div v-if="ingredient.Unit==='section'">
-                            <h2>{{ingredient.Name}}</h2>
-                          </div>
-                          <div v-else>
-                            <li>{{ ingredient.DisplayQuantity }} {{ ingredient.Unit }} {{ ingredient.Name }}</li>
-                          </div>
-                        </ul>
-                      </v-card-text>
-                      <v-divider></v-divider>
-                      <v-card-text style="height: 300px;">
-                        <p v-for="(desc, index) in item.descripcion" :key="index">
-                          {{ desc }}
-                        </p>
-                      </v-card-text>
-                      <v-divider></v-divider>
-                      <v-card-actions>
-                        <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-                      </v-card-actions>
-                    </v-card>
-                  </v-dialog>
+                  <v-card>
+                      <router-link :to="{name: 'recipe', params: { url: item.url, item: item }}">
+                        <v-img
+                          :src="require(`@/static/images/${item.image}`)"
+                          height="194"
+                          width="452"
+                          style="cursor: pointer"
+                        >
+                          <h2 class="text-left white--text" style="padding-left: 8px; padding-top: 150px; -webkit-text-stroke: 1px black;">{{ item.nombre }}</h2>
+                        </v-img>
+                      </router-link>
+                  </v-card>
                 </v-row>
               </v-card>
             </v-col>
@@ -181,23 +138,10 @@
 </template>
 
 <script>
-import firebase from "firebase/app";
-import "firebase/database";
-var firebaseConfig = {
-  apiKey: process.env.VUE_APP_API_KEY,
-  authDomain: process.env.VUE_APP_AUTH_DOMAIN, 
-  databaseURL: process.env.VUE_APP_DATABASE_URL,
-  projectId: process.env.VUE_APP_PROJECT_ID,
-  storageBucket: process.env.VUE_APP_STORAGE_BUCKET,
-  messagingSenderId: process.env.VUE_APP_MESSAGING_SENDER_ID,
-  appId: process.env.VUE_APP_APP_ID,
-};
-firebase.initializeApp(firebaseConfig);
-const database = firebase.database();
-const cookingRef = database.ref("cooking");
-export var cookingRefexp = cookingRef;
+import RecipeMixin from '../mixins/Recipe'
 export default {
   name: 'TheRecipePreview',
+  mixins: [RecipeMixin],
   data: () => ({
     itemsPerPageArray: [4, 8, 12],
     search: '',
@@ -214,10 +158,6 @@ export default {
       'Weblink'
     ],
     items: [],
-    items2: [
-      { nombre: 'Pork chops', category: 'american', ingredient: 'pork', descripcion: 'porkchop recipe instructions', weblink: 'enlace 1', image:'spicyporkchops.jpg' },
-      { nombre: 'Lasagna', category: 'italian', ingredient: 'beef', descripcion: 'lasaga recipe', weblink: 'enlace 2', image:'lasagna.jpg' }
-    ]
   }),
   computed: {
     numberOfPages () {
@@ -238,24 +178,6 @@ export default {
       this.itemsPerPage = number
     }
   },
-  created() {
-  cookingRefexp.once("value", items => {
-    items.forEach(item => {
-      this.items.push({
-        id: item.ref.key,
-        nombre: item.child("nombre").val(),
-        category: item.child("category").val(),
-        ingredients: item.child("ingredients").val(),
-        notes: item.child("notes").val(),
-        servings: item.child("servings").val(),
-        preptime: item.child("preptime").val(),
-        cooktime: item.child("cooktime").val(),
-        descripcion: item.child("descripcion").val(),
-        image: item.child("image").val(),
-      });
-    });
-  });
-  }
 }
 </script>
 

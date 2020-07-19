@@ -1,34 +1,29 @@
 import Vue from 'vue'
-import Router from 'vue-router'
+import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 
-Vue.use(Router)
+Vue.use(VueRouter)
 
-import RecipeEntries from '../statics/data/recipes.json';
-
-const recipeRoutes = Object.keys(RecipeEntries).map(section => {
-  const children = RecipeEntries[section].map(child => ({
-    path: child.id,
-    name: child.id,
-    component: () => require(`../cookdata/${section}/${child.id}.json`)
-  }))
-  return {
-    path: `/${section}`,
-    name: section,
-    component: () => require('../views/Recipe.vue'),
-    children
+  const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/recipe/:url', 
+    name: 'recipe',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/Recipe.vue')
   }
-})
+]
 
-export default new Router({
+const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    ...recipeRoutes
-  ]
+  routes
 })
+
+export default router
