@@ -16,6 +16,7 @@ export default {
 .full-background {
   padding: 10px;
   margin-top: 30px;
+  background-color: lightsteelblue;
 }
 .inner {
   max-width: 700px;
