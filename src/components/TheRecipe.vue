@@ -10,7 +10,16 @@
                 height="194"
                 width="452"
                 class="left"
-              />
+              >
+                <div class="my-2 logo absolute no-line-height top-2 z4 izq">
+                  <v-btn 
+                  depressed large
+                  href="/"
+                  >
+                    Back
+                  </v-btn>
+                </div>
+              </v-img>
               <v-card-title>{{ item.nombre }}</v-card-title>
               <hr>
               <v-card-text class="text-left">
@@ -19,28 +28,30 @@
                 <p>Cook Time: {{ item.cooktime }}</p>
               </v-card-text>
               <hr>
-              <div class="mt3 izq">
-                <v-card color="purple">
-                  <v-card-text style="height: auto;" class="sm-col sm-col-6 lg-col-6 ingredientlist">
-                  <h1>Ingredients</h1>
-                  <br>
-                  <ul v-for="(ingredient, index) in item.ingredients" :key="index">
-                    <div v-if="ingredient.Unit==='section'">
-                      <h2>{{ingredient.Name}}</h2>
-                    </div>
-                    <div v-else>
-                      <li>{{ ingredient.DisplayQuantity }} {{ ingredient.Unit }} {{ ingredient.Name }}</li>
-                    </div>
-                  </ul>
+              <div class="list">
+                <div class="mt3 izq recipe">
+                  <v-card raised color="yellow">
+                    <v-card-text style="height: auto;" class="sm-col sm-col-6 lg-col-6 ingredientlist">
+                    <h1>Ingredients</h1>
+                    <br>
+                    <ul v-for="(ingredient, index) in item.ingredients" :key="index">
+                      <div v-if="ingredient.Unit==='section'">
+                        <h2>{{ingredient.Name}}</h2>
+                      </div>
+                      <div v-else>
+                        <li>{{ ingredient.DisplayQuantity }} {{ ingredient.Unit }} {{ ingredient.Name }}</li>
+                      </div>
+                    </ul>
+                    </v-card-text>
+                  </v-card>
+                  <v-divider></v-divider>
+                  <v-card-text style="height: auto;" class="sm-col sm-col-6 lg-col-6 instructionlist">
+                    <h1>Directions</h1>
+                    <br>
+                    <p v-for="(desc, index) in item.descripcion" :key="index">{{ desc }}</p>
                   </v-card-text>
-                </v-card>
-                <v-divider></v-divider>
-                <v-card-text style="height: 300px;" class="sm-col sm-col-6 lg-col-6 instructionlist">
-                  <h1>Directions</h1>
-                  <br>
-                  <p v-for="(desc, index) in item.descripcion" :key="index">{{ desc }}</p>
-                </v-card-text>
-                <v-card-text v-if="item.notes" style="height: 300px;" class="izq notes lg-col-12 md-col-12 sm-col">
+                </div>
+                <v-card-text v-if="item.notes" style="height: auto; width:auto;" class="izq notes lg-col-12 md-col-12 sm-col">
                   <h2>Notes</h2>
                   <br>
                   <p v-for="(note, index) in item.notes" :key="index">{{ note }}</p>
@@ -87,6 +98,10 @@ export default {
 .mt3 {
     margin-top: 2rem;
 }
+.recipe {
+  display: flex;
+  flex-wrap: wrap;
+}
 .ingredientlist {
     border: 1px solid var(--grey-lightest);
     border-radius: 5px;
@@ -111,7 +126,7 @@ export default {
     width: 50%;
 }
 .sm-col-6 {
-    width: 50%;
+    width: auto;
 }
 .sm-col {
     float: left;
