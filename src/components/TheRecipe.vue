@@ -9,7 +9,6 @@
                 :src="require(`@/static/images/${item.image}`)"
                 height="194"
                 width="452"
-                class="left"
               >
                 <div class="my-2 logo absolute no-line-height top-2 z4 izq">
                   <v-btn 
@@ -23,7 +22,26 @@
               <v-card-title>{{ item.nombre }}</v-card-title>
               <hr>
               <v-card-text class="text-left">
-                <p>Servings: {{ item.servings }}</p>
+                <p>Servings:
+                  <v-btn-toggle
+                    v-model="text"
+                    mandatory
+                    rounded
+                    group
+                  >
+                    <v-btn text small outlined=true @click="cantidad=1">
+                      {{item.servings*1}}
+                    </v-btn>
+
+                    <v-btn text small outlined=true @click="cantidad=2">
+                      {{item.servings*2}}
+                    </v-btn>
+
+                    <v-btn text small outlined=true @click="cantidad=3">
+                      {{item.servings*3}}
+                    </v-btn>
+                  </v-btn-toggle>
+                </p>
                 <p>Prep Time: {{ item.preptime }}</p>
                 <p>Cook Time: {{ item.cooktime }}</p>
               </v-card-text>
@@ -31,7 +49,7 @@
               <div class="list">
                 <div class="mt3 izq recipe">
                   <v-card raised color="yellow">
-                    <v-card-text style="height: auto;" class="sm-col sm-col-6 lg-col-6 ingredientlist">
+                    <v-card-text style="height: auto;" class="ingredientes">
                     <h1>Ingredients</h1>
                     <br>
                     <ul v-for="(ingredient, index) in item.ingredients" :key="index">
@@ -39,19 +57,19 @@
                         <h2>{{ingredient.Name}}</h2>
                       </div>
                       <div v-else>
-                        <li>{{ ingredient.DisplayQuantity }} {{ ingredient.Unit }} {{ ingredient.Name }}</li>
+                        <li>{{ ingredient.Quantity * cantidad}} {{ ingredient.Unit }} {{ ingredient.Name }}</li>
                       </div>
                     </ul>
                     </v-card-text>
                   </v-card>
                   <v-divider></v-divider>
-                  <v-card-text style="height: auto;" class="sm-col sm-col-6 lg-col-6 instructionlist">
+                  <v-card-text style="height: auto;">
                     <h1>Directions</h1>
                     <br>
                     <p v-for="(desc, index) in item.descripcion" :key="index">{{ desc }}</p>
                   </v-card-text>
                 </div>
-                <v-card-text v-if="item.notes" style="height: auto; width:auto;" class="izq notes lg-col-12 md-col-12 sm-col">
+                <v-card-text v-if="item.notes" style="height: auto; width:auto;" class="izq notes">
                   <h2>Notes</h2>
                   <br>
                   <p v-for="(note, index) in item.notes" :key="index">{{ note }}</p>
@@ -71,7 +89,8 @@ export default {
   mixins: [RecipeMixin],
   data: () => ({
     currentPage: '',
-    items: []
+    items: [],
+    cantidad: 1
   }),
   created: function(){
     this.currentPage = window.location.pathname.match(/\w+$/g).join();
@@ -98,11 +117,30 @@ export default {
 .mt3 {
     margin-top: 2rem;
 }
-.recipe {
-  display: flex;
-  flex-wrap: wrap;
+
+@media only screen and (max-width: 600px) {
+  .recipe {
+    display: flex;
+    flex-wrap: wrap;
+    width: auto;
+  }
+  .ingredientes{
+    width: 400px;
+  }
 }
-.ingredientlist {
+@media only screen and (min-width: 600px) {
+  .recipe {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .ingredientes{
+    width: auto;
+  }
+  .center{
+    justify-content: center;
+  }
+}
+/* .ingredientlist {
     border: 1px solid var(--grey-lightest);
     border-radius: 5px;
         border-bottom-right-radius: 5px;
@@ -117,8 +155,8 @@ export default {
     background: -ms-linear-gradient(-45deg,var(--stickynoteColor-light) 81%,var(--stickynoteColor-light) 82%,var(--stickynoteColor-light) 82%,var(--stickynoteColor-dark) 100%);
     background: linear-gradient(135deg,var(--stickynoteColor-light) 81%,var(--stickynoteColor-light) 82%,var(--stickynoteColor-light) 82%,var(--stickynoteColor-dark) 100%);
     cursor: default;
-}
-.instructionlist {
+} */
+/* .instructionlist {
     padding: 1rem;
     cursor: default;
 }
@@ -132,16 +170,17 @@ export default {
     float: left;
     box-sizing: border-box;
 }
-.notes {
-    padding: 1rem;
-}
+
 .lg-col-12 {
     width: 100%;
 }
 .md-col-12 {
     width: 100%;
-}
+}*/
 .izq {
   text-align: left;
+} 
+.notes {
+    padding: 1rem;
 }
 </style>
